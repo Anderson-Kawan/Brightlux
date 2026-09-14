@@ -21,9 +21,7 @@
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/scopedcss/bundle/Brightlux.styles.css
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/scopedcss/projectbundle/Brightlux.bundle.scp.css
-/Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/86q4ehg5ml-{0}-b9sayid5wm-b9sayid5wm.gz
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/u1w55gwi6p-{0}-61n19gt1b8-61n19gt1b8.gz
-/Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/8u9t28sb3n-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/o2azjzy8pr-{0}-bqjiyaj88i-bqjiyaj88i.gz
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/rs5yzhj6lu-{0}-c2jlpeoesf-c2jlpeoesf.gz
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/20l5esrg2b-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -95,3 +93,5 @@
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/Brightlux.pdb
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/Brightlux.genruntimeconfig.cache
 /Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/ref/Brightlux.dll
+/Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/86q4ehg5ml-{0}-fvnk8wuclr-fvnk8wuclr.gz
+/Users/anderson/Projetos/Brightlux/obj/Debug/net10.0/compressed/8u9t28sb3n-{0}-2dlhl74wc8-2dlhl74wc8.gz
