@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: brightlux
+    runtime: docker
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+        value: "true"
+      - key: ConnectionStrings__DefaultConnection
+        value: Data Source=/var/data/brightlux.db
+      - key: DataProtection__KeyPath
+        value: /var/data/keys
+      - key: AdminSetup__Key
+        generateValue: true
+    disk:
+      name: brightlux-data
+      mountPath: /var/data
+      sizeGB: 1
