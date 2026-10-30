@@ -1,0 +1,34 @@
+@model Brightlux.ViewModels.AdminLoginViewModel
+@{
+    ViewData["Title"] = "Acesso administrativo";
+}
+
+<section class="admin-auth">
+    <div class="admin-auth__card">
+        <a asp-controller="Home" asp-action="Index" class="admin-auth__brand" aria-label="Brightlux - início">
+            <span>BRIGHT</span>LUX
+        </a>
+        <span class="admin-auth__eyebrow">ÁREA RESTRITA</span>
+        <h1>Acesso administrativo</h1>
+        <p>Entre para cadastrar e gerenciar os produtos exibidos no site.</p>
+
+        <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="admin-auth__form">
+            <div asp-validation-summary="ModelOnly" class="admin-validation"></div>
+            <div class="admin-field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" autocomplete="username" autofocus />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="admin-field">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" autocomplete="current-password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <label class="admin-auth__remember"><input asp-for="RememberMe" /> @Html.DisplayNameFor(m => m.RememberMe)</label>
+            <button type="submit" class="admin-button admin-button--primary">Entrar no painel</button>
+        </form>
+        <a asp-controller="Home" asp-action="Index" class="admin-auth__back">← Voltar para o site</a>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

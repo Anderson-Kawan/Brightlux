@@ -1,0 +1,52 @@
+@model Brightlux.Models.Product
+@{
+    ViewData["Title"] = Model.Nome;
+    var mainImage = !string.IsNullOrWhiteSpace(Model.Imagem) ? Model.Imagem : Model.Images.FirstOrDefault()?.Url;
+}
+
+<section class="product-detail-section">
+    <div class="product-detail-container">
+        <nav class="product-breadcrumb" aria-label="Navegação estrutural"><a asp-action="Index">Produtos</a><span>/</span><span>@Model.Nome</span></nav>
+        <div class="product-detail-grid">
+            <div class="product-detail-media">
+                <div class="product-detail-stage">
+                    @if (!string.IsNullOrWhiteSpace(mainImage))
+                    { <img src="@mainImage" alt="@Model.Nome" id="productMainImage" /> }
+                    else
+                    { <div class="product-image-placeholder"><span>BRIGHTLUX</span></div> }
+                    @if (Model.Destaque) { <span class="product-detail-featured">Produto em destaque</span> }
+                </div>
+                @if (Model.Images.Count > 0 && !string.IsNullOrWhiteSpace(mainImage))
+                {
+                    <div class="product-gallery" aria-label="Galeria de @Model.Nome">
+                        <button type="button" class="product-gallery__thumb is-selected" data-gallery-image="@mainImage" aria-label="Ver imagem principal"><img src="@mainImage" alt="" /></button>
+                        @foreach (var image in Model.Images.Where(image => image.Url != mainImage))
+                        { <button type="button" class="product-gallery__thumb" data-gallery-image="@image.Url" aria-label="Ver outra imagem de @Model.Nome"><img src="@image.Url" alt="" loading="lazy" /></button> }
+                    </div>
+                }
+            </div>
+            <div class="product-detail-content">
+                <span class="product-detail-category">@Model.Categoria</span><h1>@Model.Nome</h1>
+                <p class="product-detail-description">@Model.Descricao</p>
+                <div class="product-detail-meta">
+                    <div><span>Aplicação recomendada</span><strong>@(string.IsNullOrWhiteSpace(Model.Aplicacao) ? "Consulte nossa engenharia" : Model.Aplicacao)</strong></div>
+                    <div><span>Desenvolvimento</span><strong>Engenharia Brightlux</strong></div>
+                </div>
+                <a href="/#contato" class="product-detail-cta"><span>Solicitar atendimento</span><b>↗</b></a>
+                <a asp-action="Index" class="product-detail-back">← Voltar para todos os produtos</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('[data-gallery-image]').forEach(button => button.addEventListener('click', () => {
+            const mainImage = document.getElementById('productMainImage');
+            if (!mainImage) return;
+            mainImage.src = button.dataset.galleryImage;
+            document.querySelectorAll('[data-gallery-image]').forEach(item => item.classList.remove('is-selected'));
+            button.classList.add('is-selected');
+        }));
+    </script>
+}

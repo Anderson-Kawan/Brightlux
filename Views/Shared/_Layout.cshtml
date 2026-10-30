@@ -1,128 +1,22 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>@ViewData["Title"] - Brightlux</title>
-
-    <meta name="description"
-          content="Brightlux - Soluções completas em iluminação para grandes projetos, indústrias, empresas, espaços públicos e ambientes comerciais." />
-
+    <meta name="description" content="Brightlux - Soluções completas em iluminação para grandes projetos, indústrias, empresas, espaços públicos e ambientes comerciais." />
     <meta name="theme-color" content="#0F4D80" />
-
+    <meta name="author" content="Brightlux" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
-
 <body>
-
-    <!-- =========================================================
-         HEADER
-    ========================================================== -->
-
-    <header class="site-header" id="siteHeader">
-
-        <div class="header-container">
-
-            <!-- LOGO -->
-            <a class="brand" asp-controller="Home" asp-action="Index">
-
-                <span class="brand-bright">BRIGHT</span><span class="brand-lux">LUX</span>
-
-            </a>
-
-
-            <!-- NAVEGAÇÃO DESKTOP -->
-
-            <nav class="main-navigation" aria-label="Navegação principal">
-
-                <a href="#inicio" class="nav-link active">
-                    Início
-                </a>
-
-                <a href="#solucoes" class="nav-link">
-                    Soluções
-                </a>
-
-                <a href="#produtos" class="nav-link">
-                    Produtos
-                </a>
-
-                <a href="#projetos" class="nav-link">
-                    Projetos
-                </a>
-
-                <a href="#empresa" class="nav-link">
-                    A Brightlux
-                </a>
-
-            </nav>
-
-
-            <!-- CTA HEADER -->
-
-            <a href="#contato" class="header-cta">
-                Fale com um especialista
-                <span class="cta-arrow">→</span>
-            </a>
-
-
-            <!-- BOTÃO MENU MOBILE -->
-
-            <button class="mobile-menu-button"
-                    id="mobileMenuButton"
-                    type="button"
-                    aria-label="Abrir menu"
-                    aria-expanded="false">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </button>
-
-        </div>
-
-
-        <!-- MENU MOBILE -->
-
-        <div class="mobile-navigation" id="mobileNavigation">
-
-            <a href="#inicio">Início</a>
-
-            <a href="#solucoes">Soluções</a>
-
-            <a href="#produtos">Produtos</a>
-
-            <a href="#projetos">Projetos</a>
-
-            <a href="#empresa">A Brightlux</a>
-
-            <a href="#contato" class="mobile-navigation-cta">
-                Fale com um especialista →
-            </a>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================================================
-         CONTEÚDO
-    ========================================================== -->
-
-    <main>
-        @RenderBody()
-    </main>
-
-
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
-
+    <partial name="_Header" />
+    <main>@RenderBody()</main>
+    <partial name="_Footer" />
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>

@@ -1,0 +1,17 @@
+@model Brightlux.Models.Product
+@{
+    ViewData["Title"] = "Novo produto";
+}
+
+<section class="product-admin">
+    <div class="product-admin__container product-admin__container--form">
+        <header class="product-admin__header">
+            <div><span class="section-eyebrow">CATÁLOGO</span><h1>Novo produto</h1></div>
+        </header>
+        <form asp-action="Create" method="post" class="admin-form">
+            <partial name="_Form" model="Model" />
+        </form>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

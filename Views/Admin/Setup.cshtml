@@ -1,0 +1,44 @@
+@model Brightlux.ViewModels.AdminSetupViewModel
+@{
+    ViewData["Title"] = "Criar administrador";
+}
+
+<section class="admin-auth">
+    <div class="admin-auth__card">
+        <div class="admin-auth__brand"><span>BRIGHT</span>LUX</div>
+        <span class="admin-auth__eyebrow">PRIMEIRO ACESSO</span>
+        <h1>Crie o administrador</h1>
+        <p>Este cadastro será fechado automaticamente após a criação da primeira conta.</p>
+
+        <form asp-action="Setup" method="post" class="admin-auth__form">
+            <div asp-validation-summary="ModelOnly" class="admin-validation"></div>
+            @if (ViewData["RequiresSetupKey"] as bool? == true)
+            {
+                <div class="admin-field">
+                    <label asp-for="SetupKey"></label>
+                    <input asp-for="SetupKey" autocomplete="off" />
+                    <span asp-validation-for="SetupKey"></span>
+                </div>
+            }
+            <div class="admin-field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" autocomplete="username" autofocus />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="admin-field">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" autocomplete="new-password" />
+                <span asp-validation-for="Password"></span>
+                <small>Mínimo de 8 caracteres, com maiúscula, minúscula e número.</small>
+            </div>
+            <div class="admin-field">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" autocomplete="new-password" />
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <button type="submit" class="admin-button admin-button--primary">Criar administrador</button>
+        </form>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

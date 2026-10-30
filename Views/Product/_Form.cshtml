@@ -1,0 +1,52 @@
+@model Brightlux.Models.Product
+
+<div asp-validation-summary="ModelOnly" class="admin-validation"></div>
+
+<div class="admin-form__grid">
+    <div class="admin-field admin-field--wide">
+        <label asp-for="Nome"></label>
+        <input asp-for="Nome" />
+        <span asp-validation-for="Nome"></span>
+    </div>
+    <div class="admin-field">
+        <label asp-for="Categoria"></label>
+        <input asp-for="Categoria" />
+        <span asp-validation-for="Categoria"></span>
+    </div>
+    <div class="admin-field">
+        <label asp-for="Aplicacao"></label>
+        <input asp-for="Aplicacao" />
+        <span asp-validation-for="Aplicacao"></span>
+    </div>
+    <div class="admin-field admin-field--wide">
+        <label asp-for="Descricao"></label>
+        <textarea asp-for="Descricao" rows="5"></textarea>
+        <span asp-validation-for="Descricao"></span>
+    </div>
+    <div class="admin-field admin-field--wide">
+        <label asp-for="Imagem"></label>
+        <input asp-for="Imagem" placeholder="/images/produtos/exemplo.jpg" />
+        <span asp-validation-for="Imagem"></span>
+        <small>Use um caminho do site ou uma URL completa.</small>
+    </div>
+    <div class="admin-field admin-field--wide">
+        <label asp-for="AdditionalImagesInput"></label>
+        <textarea asp-for="AdditionalImagesInput" rows="6" placeholder="/images/produtos/produto-lateral.jpg&#10;/images/produtos/produto-instalado.jpg"></textarea>
+        <span asp-validation-for="AdditionalImagesInput"></span>
+        <small>Informe até 10 imagens, uma por linha. A imagem acima continuará sendo a capa.</small>
+    </div>
+    <div class="admin-field">
+        <label asp-for="Ordem"></label>
+        <input asp-for="Ordem" min="0" />
+        <span asp-validation-for="Ordem"></span>
+    </div>
+    <div class="admin-checks">
+        <label><input asp-for="Ativo" /> Exibir no catálogo</label>
+        <label><input asp-for="Destaque" /> Exibir em destaque</label>
+    </div>
+</div>
+
+<div class="admin-form__actions">
+    <button type="submit" class="admin-button admin-button--primary">Salvar produto</button>
+    <a asp-action="Admin" class="admin-button">Cancelar</a>
+</div>

@@ -1,24 +1,28 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+using Brightlux.Data;
 using Brightlux.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brightlux.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index()
+    private readonly ApplicationDbContext _context;
+
+    public HomeController(ApplicationDbContext context)
     {
-        return View();
+        _context = context;
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> Index()
     {
-        return View();
-    }
+        var products = await _context.Products
+            .Where(p => p.Ativo && p.Destaque)
+            .OrderBy(p => p.Ordem)
+            .ThenByDescending(p => p.DataCadastro)
+            .Take(4)
+            .ToListAsync();
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(products);
     }
 }

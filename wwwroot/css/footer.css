@@ -1,0 +1,30 @@
+/* Shared footer component. */
+.site-footer { background: var(--blue-dark); color: var(--white); margin-top: 0; }
+.footer-main {
+    width: min(100% - 48px, 1380px);
+    min-height: 300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 1.45fr 1.15fr 1.15fr;
+}
+.footer-image { position: relative; min-height: 300px; overflow: hidden; }
+.footer-image img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; display: block; }
+.footer-cta, .footer-contact, .footer-social-news { display: flex; flex-direction: column; justify-content: center; }
+.footer-bottom-container {
+    width: min(100% - 48px, 1380px);
+    min-height: 62px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+@media (max-width: 850px) {
+    .footer-main { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .footer-main { width: 100%; grid-template-columns: 1fr; }
+    .footer-bottom-container { width: calc(100% - 32px); padding: 20px 0; flex-direction: column; align-items: flex-start; }
+}

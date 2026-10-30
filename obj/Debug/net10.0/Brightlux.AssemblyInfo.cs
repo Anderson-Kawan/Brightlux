@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brightlux")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96751ee5214edd601f8bf6caa9f23d62899454c5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5df751cc68432ee179a1a7bab47a82ec540c8bfa")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brightlux")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brightlux")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

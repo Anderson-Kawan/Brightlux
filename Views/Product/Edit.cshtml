@@ -1,0 +1,18 @@
+@model Brightlux.Models.Product
+@{
+    ViewData["Title"] = "Editar produto";
+}
+
+<section class="product-admin">
+    <div class="product-admin__container product-admin__container--form">
+        <header class="product-admin__header">
+            <div><span class="section-eyebrow">CATÁLOGO</span><h1>Editar produto</h1><p>@Model.Nome</p></div>
+        </header>
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="admin-form">
+            <input asp-for="Id" type="hidden" />
+            <partial name="_Form" model="Model" />
+        </form>
+    </div>
+</section>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

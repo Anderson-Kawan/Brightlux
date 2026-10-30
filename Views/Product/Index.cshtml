@@ -1,0 +1,88 @@
+@model List<Brightlux.Models.Product>
+@{
+    ViewData["Title"] = "Produtos";
+    var categories = Model.Where(p => !string.IsNullOrWhiteSpace(p.Categoria)).Select(p => p.Categoria)
+        .Distinct(StringComparer.OrdinalIgnoreCase).OrderBy(c => c).ToList();
+}
+
+<section class="catalog-hero">
+    <div class="catalog-hero__glow"></div>
+    <div class="catalog-container catalog-hero__content">
+        <div class="catalog-hero__copy">
+            <div class="catalog-kicker"><span></span> PORTFÓLIO BRIGHTLUX</div>
+            <h1>Iluminação que transforma <em>performance em resultado.</em></h1>
+            <p>Soluções desenvolvidas para entregar eficiência, durabilidade e qualidade luminosa em projetos de alta exigência.</p>
+        </div>
+        <div class="catalog-hero__metric" aria-label="Total de soluções no catálogo">
+            <strong>@Model.Count.ToString("00")</strong><span>soluções<br />no catálogo</span>
+        </div>
+    </div>
+    <div class="catalog-hero__line"></div>
+</section>
+
+<section class="catalog-section">
+    <div class="catalog-container">
+        @if (Model.Any())
+        {
+            <div class="catalog-toolbar">
+                <div><span class="catalog-toolbar__label">Explore por aplicação</span><h2>Soluções para cada projeto</h2></div>
+                @if (categories.Count > 1)
+                {
+                    <div class="catalog-filters" role="group" aria-label="Filtrar produtos por categoria">
+                        <button type="button" class="catalog-filter is-active" data-product-filter="all">Todos</button>
+                        @foreach (var category in categories)
+                        { <button type="button" class="catalog-filter" data-product-filter="@category">@category</button> }
+                    </div>
+                }
+            </div>
+
+            <div class="catalog-grid" id="productsGrid">
+                @foreach (var product in Model)
+                {
+                    <article class="catalog-card" data-product-category="@product.Categoria">
+                        <a asp-action="Details" asp-route-id="@product.Id" class="catalog-card__link" aria-label="Conhecer @product.Nome">
+                            <div class="catalog-card__media">
+                                @if (!string.IsNullOrWhiteSpace(product.Imagem))
+                                { <img src="@product.Imagem" alt="@product.Nome" loading="lazy" /> }
+                                else
+                                { <div class="product-image-placeholder"><span>BRIGHTLUX</span></div> }
+                                <span class="catalog-card__index">@product.Ordem.ToString("00")</span>
+                                @if (product.Destaque) { <span class="catalog-card__featured">Destaque</span> }
+                                <span class="catalog-card__reveal">Ver produto <b>↗</b></span>
+                            </div>
+                            <div class="catalog-card__body">
+                                <span class="catalog-card__category">@product.Categoria</span>
+                                <h3>@product.Nome</h3><p>@product.Descricao</p>
+                                <div class="catalog-card__footer"><span>@(string.IsNullOrWhiteSpace(product.Aplicacao) ? "Solução Brightlux" : product.Aplicacao)</span><i aria-hidden="true">→</i></div>
+                            </div>
+                        </a>
+                    </article>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="catalog-empty"><span>BRIGHTLUX</span><h2>Novas soluções estão chegando.</h2><p>Nosso catálogo está sendo atualizado. Fale com nossa equipe para encontrar a solução ideal.</p><a href="/#contato" class="catalog-cta">Falar com um especialista <span>→</span></a></div>
+        }
+    </div>
+</section>
+
+<section class="catalog-contact">
+    <div class="catalog-container catalog-contact__inner">
+        <div><span>PROJETO SOB MEDIDA</span><h2>Não encontrou o que procura?</h2></div>
+        <p>Nossa engenharia desenvolve a solução luminotécnica ideal para as necessidades do seu projeto.</p>
+        <a href="/#contato">Fale com um especialista <span>↗</span></a>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        const filterButtons = document.querySelectorAll('[data-product-filter]');
+        const productCards = document.querySelectorAll('[data-product-category]');
+        filterButtons.forEach(button => button.addEventListener('click', () => {
+            const selected = button.dataset.productFilter;
+            filterButtons.forEach(item => item.classList.toggle('is-active', item === button));
+            productCards.forEach(card => card.hidden = selected !== 'all' && card.dataset.productCategory !== selected);
+        }));
+    </script>
+}
