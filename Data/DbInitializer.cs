@@ -7,6 +7,15 @@ public static class DbInitializer
 {
     public static async Task SeedAsync(ApplicationDbContext context)
     {
+        // Serialize migrations and initial seed across concurrently starting containers.
+        var postgres = context.Database.IsNpgsql();
+        if (postgres)
+        {
+            await context.Database.OpenConnectionAsync();
+            await context.Database.ExecuteSqlRawAsync("SELECT pg_advisory_lock(763724195)");
+        }
+        try
+        {
         await context.Database.MigrateAsync();
 
         if (await context.Products.AnyAsync())
@@ -68,5 +77,14 @@ public static class DbInitializer
         await context.Products.AddRangeAsync(products);
 
         await context.SaveChangesAsync();
+        }
+        finally
+        {
+            if (postgres)
+            {
+                await context.Database.ExecuteSqlRawAsync("SELECT pg_advisory_unlock(763724195)");
+                await context.Database.CloseConnectionAsync();
+            }
+        }
     }
 }

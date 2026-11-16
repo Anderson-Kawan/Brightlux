@@ -5,8 +5,27 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = builder.Configuration["PORT"];
+if (!string.IsNullOrWhiteSpace(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
+var postgresConnection = builder.Configuration.GetConnectionString("Postgres");
+if (!string.IsNullOrWhiteSpace(builder.Configuration["VERCEL"]) && string.IsNullOrWhiteSpace(postgresConnection))
+{
+    throw new InvalidOperationException("Configure ConnectionStrings__Postgres para usar um banco PostgreSQL na Vercel.");
+}
+
 var dataProtectionKeyPath = builder.Configuration["DataProtection:KeyPath"];
-if (!string.IsNullOrWhiteSpace(dataProtectionKeyPath))
+if (!string.IsNullOrWhiteSpace(postgresConnection))
+{
+    builder.Services.AddDbContext<PostgresDbContext>(options => options.UseNpgsql(postgresConnection));
+    builder.Services.AddScoped<ApplicationDbContext>(services => services.GetRequiredService<PostgresDbContext>());
+    builder.Services.AddDataProtection().SetApplicationName("Brightlux")
+        .PersistKeysToDbContext<PostgresDbContext>();
+}
+else if (!string.IsNullOrWhiteSpace(dataProtectionKeyPath))
 {
     Directory.CreateDirectory(dataProtectionKeyPath);
     builder.Services.AddDataProtection()
@@ -18,6 +37,8 @@ if (!string.IsNullOrWhiteSpace(dataProtectionKeyPath))
 // BANCO DE DADOS
 // =========================================================
 
+if (string.IsNullOrWhiteSpace(postgresConnection))
+{
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException(
@@ -27,6 +48,7 @@ var connectionString =
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString)
 );
+}
 
 
 // =========================================================

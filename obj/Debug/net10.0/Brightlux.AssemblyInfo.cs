@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brightlux")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5df751cc68432ee179a1a7bab47a82ec540c8bfa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c5ba6f832c3c887b9b17c9e14146ef068c40ac3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brightlux")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brightlux")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

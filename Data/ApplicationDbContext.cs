@@ -13,6 +13,10 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
     }
 
+    protected ApplicationDbContext(DbContextOptions options) : base(options)
+    {
+    }
+
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ProductImage> ProductImages => Set<ProductImage>();
 
